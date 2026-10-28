@@ -431,3 +431,4 @@ class NirapodJatayatSeeder extends Seeder
         }
     }
 }
+

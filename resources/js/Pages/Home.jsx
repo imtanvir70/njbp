@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Head } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import HeroSection from '@/Components/HeroSection';
@@ -8,16 +8,10 @@ import SuccessStoriesSection from '@/Components/SuccessStoriesSection';
 import TeamSection from '@/Components/TeamSection';
 import AwarenessCampaignsSection from '@/Components/AwarenessCampaignsSection';
 import GlobalAffiliationsSection from '@/Components/GlobalAffiliationsSection';
-import { 
-    Image as ImageIcon, 
-    ShieldAlert, 
-    ArrowRight, 
-    CheckCircle2, 
-    PhoneCall, 
-    ExternalLink 
-} from 'lucide-react';
+import { useLanguage } from '@/Context/LanguageContext';
+import { Image as ImageIcon } from 'lucide-react';
 
-export default function Home({
+function HomeContent({
     gallery = [],
     teamMembers = [],
     successStories = [],
@@ -25,12 +19,12 @@ export default function Home({
     recentIncidents = [],
     stats = {},
 }) {
-    const [isReportOpen, setIsReportOpen] = useState(false);
+    const { t, lang } = useLanguage();
 
     return (
-        <PublicLayout>
+        <>
             <Head>
-                <title>Nirapod Jatayat - Safe Multimodal Transit International</title>
+                <title>{lang === 'bn' ? 'নিরাপদ যাতায়াত - আন্তর্জাতিক নিরাপদ পরিবহন নেটওয়ার্ক' : 'Nirapod Jatayat - Safe Multimodal Transit International'}</title>
                 <meta name="description" content="Nirapod Jatayat (Safe Journey) monitors Road, Air, Train, and Water transit safety, conducts scientific safety audits, and champions public awareness." />
             </Head>
 
@@ -38,29 +32,26 @@ export default function Home({
             <HeroSection
                 stats={stats}
                 onOpenIncidentModal={() => {
-                    const btn = document.querySelector('button[title="Report Incident"]') || document.querySelector('button span');
-                    // Find modal trigger from layout
-                    const event = new CustomEvent('open-incident-modal');
-                    window.dispatchEvent(event);
+                    window.dispatchEvent(new CustomEvent('open-incident-modal'));
                 }}
             />
 
             {/* 2. Four Transit Quadrants Matrix (Road, Air, Rail, Water) */}
             <TransitQuadrants />
 
-            {/* 3. Photo Gallery Slider Showcase */}
-            <section id="gallery" className="py-20 bg-slate-900/50 border-t border-slate-800 relative">
+            {/* 3. Photo Gallery Slider Showcase - Light Mode */}
+            <section id="gallery" className="py-20 bg-white border-t border-slate-200/80 relative">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold tracking-wide">
-                            <ImageIcon className="w-3.5 h-3.5" />
-                            <span>Visual Evidence & Field Operations</span>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 border border-sky-200 text-sky-800 text-xs font-semibold tracking-wide">
+                            <ImageIcon className="w-3.5 h-3.5 text-sky-600" />
+                            <span>{t('galleryBadge')}</span>
                         </div>
-                        <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                            Transit Vigilance in Action
+                        <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                            {t('galleryTitle')}
                         </h2>
-                        <p className="text-sm sm:text-base text-slate-400">
-                            Explore high-resolution field photographs documenting our real-time road radars, aerodrome inspections, river launch load-line checks, and nationwide youth safety rallies.
+                        <p className="text-sm sm:text-base text-slate-600">
+                            {t('gallerySubtitle')}
                         </p>
                     </div>
 
@@ -80,6 +71,14 @@ export default function Home({
 
             {/* 7. Global Affiliations & Standards */}
             <GlobalAffiliationsSection />
+        </>
+    );
+}
+
+export default function Home(props) {
+    return (
+        <PublicLayout>
+            <HomeContent {...props} />
         </PublicLayout>
     );
 }

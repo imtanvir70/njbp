@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLanguage } from '@/Context/LanguageContext';
 import { 
     ChevronLeft, 
     ChevronRight, 
@@ -6,17 +7,12 @@ import {
     X, 
     Calendar, 
     MapPin, 
-    Tag, 
     Play, 
-    Pause,
-    Car,
-    Plane,
-    Train,
-    Ship,
-    Sparkles
+    Pause
 } from 'lucide-react';
 
 export default function GallerySlider({ items = [] }) {
+    const { t, lang } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [lightboxItem, setLightboxItem] = useState(null);
@@ -49,19 +45,19 @@ export default function GallerySlider({ items = [] }) {
     };
 
     const categories = [
-        { id: 'all', label: 'All Photos' },
-        { id: 'road', label: 'Road Safety' },
-        { id: 'air', label: 'Aviation Audit' },
-        { id: 'train', label: 'Railway & Crossings' },
-        { id: 'water', label: 'Maritime & Riverine' },
-        { id: 'awareness', label: 'Civic Campaigns' },
-        { id: 'international', label: 'Global Summits' },
+        { id: 'all', label: t('filterAll') },
+        { id: 'road', label: t('filterRoad') },
+        { id: 'air', label: t('filterAir') },
+        { id: 'train', label: t('filterTrain') },
+        { id: 'water', label: t('filterWater') },
+        { id: 'awareness', label: t('filterAwareness') },
+        { id: 'international', label: t('filterInternational') },
     ];
 
     if (!filteredItems.length) {
         return (
-            <div className="py-12 text-center text-slate-400">
-                <p>No gallery photos available in this category.</p>
+            <div className="py-12 text-center text-slate-500">
+                <p>{lang === 'bn' ? 'এই ক্যাটাগরিতে কোনো ছবি পাওয়া যায়নি।' : 'No gallery photos available in this category.'}</p>
             </div>
         );
     }
@@ -78,8 +74,8 @@ export default function GallerySlider({ items = [] }) {
                         onClick={() => setSelectedCategory(cat.id)}
                         className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all ${
                             selectedCategory === cat.id
-                                ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/25 scale-105'
-                                : 'bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800'
+                                ? 'bg-sky-600 text-white shadow-md shadow-sky-600/25 scale-105'
+                                : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm'
                         }`}
                     >
                         {cat.label}
@@ -88,7 +84,7 @@ export default function GallerySlider({ items = [] }) {
             </div>
 
             {/* Main Interactive Carousel / Showcase */}
-            <div className="relative rounded-3xl overflow-hidden bg-slate-950 border border-slate-800 shadow-2xl group">
+            <div className="relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-2xl group">
                 <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden">
                     {/* Background Hero Image */}
                     <img
@@ -98,14 +94,14 @@ export default function GallerySlider({ items = [] }) {
                     />
 
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent"></div>
 
                     {/* Category Badge & Expand Top Left */}
                     <div className="absolute top-4 left-4 sm:top-6 sm:left-6 flex items-center gap-3">
-                        <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-slate-900/90 backdrop-blur-md text-sky-400 border border-sky-500/30">
+                        <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full bg-white/90 backdrop-blur-md text-sky-800 shadow-sm">
                             {currentSlide.category}
                         </span>
-                        <span className="text-xs text-white/80 bg-black/60 px-2.5 py-1 rounded-full backdrop-blur-sm">
+                        <span className="text-xs text-white/90 bg-black/50 px-2.5 py-1 rounded-full backdrop-blur-sm">
                             {currentIndex + 1} / {filteredItems.length}
                         </span>
                     </div>
@@ -114,14 +110,14 @@ export default function GallerySlider({ items = [] }) {
                     <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2">
                         <button
                             onClick={() => setIsAutoPlay(!isAutoPlay)}
-                            className="p-2 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md transition-all"
+                            className="p-2 rounded-full bg-black/50 hover:bg-black/75 text-white backdrop-blur-md transition-all"
                             title={isAutoPlay ? 'Pause Auto-slide' : 'Play Auto-slide'}
                         >
                             {isAutoPlay ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                         </button>
                         <button
                             onClick={() => setLightboxItem(currentSlide)}
-                            className="p-2 rounded-full bg-sky-600/80 hover:bg-sky-600 text-white backdrop-blur-md transition-all hover:scale-110"
+                            className="p-2 rounded-full bg-sky-600 hover:bg-sky-500 text-white backdrop-blur-md transition-all hover:scale-110 shadow-lg"
                             title="Open Lightbox"
                         >
                             <Maximize2 className="w-4 h-4" />
@@ -131,14 +127,14 @@ export default function GallerySlider({ items = [] }) {
                     {/* Arrow Navigation */}
                     <button
                         onClick={handlePrev}
-                        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/70 hover:bg-sky-600 text-white flex items-center justify-center border border-white/10 backdrop-blur-md transition-all hover:scale-110 opacity-90 group-hover:opacity-100 shadow-xl"
+                        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg backdrop-blur-md transition-all hover:scale-110 opacity-90 group-hover:opacity-100"
                         aria-label="Previous Slide"
                     >
                         <ChevronLeft className="w-6 h-6" />
                     </button>
                     <button
                         onClick={handleNext}
-                        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/70 hover:bg-sky-600 text-white flex items-center justify-center border border-white/10 backdrop-blur-md transition-all hover:scale-110 opacity-90 group-hover:opacity-100 shadow-xl"
+                        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow-lg backdrop-blur-md transition-all hover:scale-110 opacity-90 group-hover:opacity-100"
                         aria-label="Next Slide"
                     >
                         <ChevronRight className="w-6 h-6" />
@@ -167,7 +163,7 @@ export default function GallerySlider({ items = [] }) {
                             </h3>
 
                             {currentSlide.caption && (
-                                <p className="text-sm sm:text-base text-slate-300 line-clamp-2 sm:line-clamp-3 leading-relaxed drop-shadow">
+                                <p className="text-sm sm:text-base text-slate-200 line-clamp-2 sm:line-clamp-3 leading-relaxed drop-shadow">
                                     {currentSlide.caption}
                                 </p>
                             )}
@@ -175,8 +171,8 @@ export default function GallerySlider({ items = [] }) {
                     </div>
                 </div>
 
-                {/* Thumbnail Strip */}
-                <div className="bg-slate-950 p-4 border-t border-slate-800/80 overflow-x-auto">
+                {/* Thumbnail Strip - Light Mode */}
+                <div className="bg-white p-4 border-t border-slate-200 overflow-x-auto">
                     <div className="flex items-center gap-3">
                         {filteredItems.map((item, idx) => (
                             <button
@@ -184,8 +180,8 @@ export default function GallerySlider({ items = [] }) {
                                 onClick={() => setCurrentIndex(idx)}
                                 className={`relative shrink-0 rounded-xl overflow-hidden w-24 h-16 transition-all ${
                                     currentIndex === idx
-                                        ? 'ring-2 ring-sky-400 scale-105 shadow-md shadow-sky-500/20'
-                                        : 'opacity-50 hover:opacity-100'
+                                        ? 'ring-2 ring-sky-600 scale-105 shadow-md shadow-sky-600/20'
+                                        : 'opacity-60 hover:opacity-100 border border-slate-200'
                                 }`}
                             >
                                 <img
@@ -193,7 +189,7 @@ export default function GallerySlider({ items = [] }) {
                                     alt={item.title}
                                     className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                                 <span className="absolute bottom-1 left-1 text-[10px] text-white font-semibold line-clamp-1 px-1">
                                     {item.title}
                                 </span>
@@ -205,28 +201,28 @@ export default function GallerySlider({ items = [] }) {
 
             {/* Lightbox Zoom Modal */}
             {lightboxItem && (
-                <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4">
+                <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
                     <div className="relative max-w-5xl w-full">
                         <button
                             onClick={() => setLightboxItem(null)}
-                            className="absolute -top-12 right-0 p-2 text-white/70 hover:text-white bg-slate-800 rounded-full"
+                            className="absolute -top-12 right-0 p-2 text-white/80 hover:text-white bg-slate-800 rounded-full"
                         >
                             <X className="w-6 h-6" />
                         </button>
-                        <div className="rounded-2xl overflow-hidden border border-slate-700 bg-slate-900 shadow-2xl">
+                        <div className="rounded-2xl overflow-hidden border border-slate-700 bg-white shadow-2xl">
                             <img
                                 src={lightboxItem.image_url}
                                 alt={lightboxItem.title}
-                                className="w-full max-h-[70vh] object-contain bg-black"
+                                className="w-full max-h-[70vh] object-contain bg-slate-950"
                             />
-                            <div className="p-6 bg-slate-950 text-white space-y-2">
-                                <div className="flex items-center gap-3 text-xs text-sky-400">
-                                    <span className="uppercase font-bold">{lightboxItem.category}</span>
+                            <div className="p-6 bg-white text-slate-900 space-y-2 border-t border-slate-200">
+                                <div className="flex items-center gap-3 text-xs text-sky-600 font-bold">
+                                    <span className="uppercase">{lightboxItem.category}</span>
                                     <span>•</span>
                                     <span>{lightboxItem.location}</span>
                                 </div>
-                                <h4 className="text-xl font-bold">{lightboxItem.title}</h4>
-                                <p className="text-sm text-slate-300">{lightboxItem.caption}</p>
+                                <h4 className="text-xl font-bold text-slate-900">{lightboxItem.title}</h4>
+                                <p className="text-sm text-slate-600">{lightboxItem.caption}</p>
                             </div>
                         </div>
                     </div>

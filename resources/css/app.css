@@ -25,16 +25,16 @@
     }
 }
 
-/* Custom sleek scrollbar */
+/* Custom sleek light scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: #0b1329;
+    background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-    background: #1e2c4f;
+    background: #cbd5e1;
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

@@ -6,18 +6,13 @@ import {
     ArrowRight, 
     Activity, 
     Shield, 
-    Car, 
-    Plane, 
-    Train, 
-    Ship, 
     Users, 
     CheckCircle2, 
-    TrendingUp,
-    Radio
+    TrendingUp
 } from 'lucide-react';
 
 export default function HeroSection({ stats = {}, onOpenIncidentModal }) {
-    const { lang, t } = useLanguage();
+    const { lang } = useLanguage();
     const isBangla = lang === 'bn';
 
     const statCards = [
@@ -32,7 +27,7 @@ export default function HeroSection({ stats = {}, onOpenIncidentModal }) {
         {
             label: isBangla ? 'সচেতন নাগরিক' : 'Citizens Reached',
             val: stats.citizens_reached || '850K+',
-            desc: isBangla ? 'সরাসরি জনসচেতনতা' : 'Awareness Blitzes',
+            desc: isBangla ? 'সরাসরি সচেতনতা' : 'Awareness Blitzes',
             icon: Users,
             color: 'text-emerald-600',
             bg: 'bg-emerald-50 border-emerald-100',
@@ -56,15 +51,15 @@ export default function HeroSection({ stats = {}, onOpenIncidentModal }) {
     ];
 
     return (
-        <section className="relative min-h-[680px] lg:min-h-[740px] flex flex-col justify-between pt-10 pb-16 md:pt-16 md:pb-20 bg-gradient-to-b from-white via-slate-50/60 to-white overflow-hidden border-b border-slate-200/80">
-            {/* Animated Moving Transit Background (Bus, Car, Train, Ship, Airplane) */}
+        <section className="relative min-h-[720px] lg:min-h-[780px] flex flex-col justify-between pt-12 pb-14 md:pt-16 md:pb-16 bg-gradient-to-b from-slate-50 via-white to-slate-50/70 overflow-hidden border-b border-slate-200/80">
+            {/* 4 Corners Sequential Staggered Transit Animation Background */}
             <TransitAnimationBackground />
 
-            {/* Foreground Content - Ultra Clean, Bold & Focused */}
-            <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-8 text-center my-auto space-y-7">
-                {/* Top Badge: Organization Identity & UN Framework */}
+            {/* Middle Foreground Area: Completely Clean, Unobstructed & Ultra-Bold */}
+            <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center my-auto space-y-6">
+                {/* Official Accreditation Pill */}
                 <div className="flex justify-center">
-                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 shadow-sm text-slate-700 text-xs font-bold">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 shadow-sm text-slate-700 text-xs font-bold">
                         <span className="flex h-2 w-2 relative">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -73,30 +68,30 @@ export default function HeroSection({ stats = {}, onOpenIncidentModal }) {
                             {isBangla ? 'জাতিসংঘ সড়ক নিরাপত্তা দশক ২০২১–২০৩০' : 'UN DECADE OF ACTION 2021–2030'}
                         </span>
                         <span className="text-slate-300">|</span>
-                        <span className="text-slate-600 font-medium">
+                        <span className="text-slate-600 font-medium text-[11px]">
                             {isBangla ? 'আন্তর্জাতিক বহুমুখী যাতায়াত নিরাপত্তা কাউন্সিল' : 'Multimodal Transit Safety & Vigilance'}
                         </span>
                     </div>
                 </div>
 
                 {/* Big Bold Headline Requested by User */}
-                <div className="space-y-2 sm:space-y-3">
-                    <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 tracking-tight leading-[1.15]">
+                <div className="space-y-2">
+                    <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 tracking-tight leading-[1.12]">
                         {isBangla ? 'নিরাপদ হোক প্রতিটি যাত্রা —' : 'Safeguarding Every Journey —'}
                     </h1>
-                    <div className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.15] bg-gradient-to-r from-blue-700 via-sky-600 to-teal-600 bg-clip-text text-transparent">
+                    <div className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.12] bg-gradient-to-r from-blue-700 via-sky-600 to-teal-600 bg-clip-text text-transparent">
                         {isBangla ? 'সড়ক, আকাশ, রেল ও নৌপথে' : 'Road, Sky, Rail & Water'}
                     </div>
                 </div>
 
-                {/* Clean, Compelling Mission Subtext */}
-                <p className="text-base sm:text-xl text-slate-600 leading-relaxed max-w-3xl mx-auto font-normal">
+                {/* Clean Mission Subtitle */}
+                <p className="text-base sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
                     {isBangla
                         ? 'সড়ক দুর্ঘটনা রোধ, বিমানের গ্রাউন্ড সেফটি, ট্রেনের অরক্ষিত ক্রসিং এবং নদীপথে লঞ্চের অতিরিক্ত বোঝাই বন্ধে সার্বক্ষণিক নজরদারি ও জনসচেতনতা বৃদ্ধিতে নিবেদিত।'
                         : 'Dedicated to continuous surveillance, blackspot elimination, and nationwide public awareness to prevent accidents across highways, aviation, railways, and waterways.'}
                 </p>
 
-                {/* Action CTA Buttons */}
+                {/* High-Impact Action CTAs */}
                 <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <button
                         onClick={() => {
@@ -118,33 +113,10 @@ export default function HeroSection({ stats = {}, onOpenIncidentModal }) {
                         <ArrowRight className="w-4 h-4 text-slate-400" />
                     </a>
                 </div>
-
-                {/* 4 Transit Domain Pills (Visual anchors corresponding to background movement) */}
-                <div className="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs">
-                    {[
-                        { name: isBangla ? 'সড়ক ও বাস' : 'Road & Expressways', icon: Car, color: 'text-blue-600', dot: 'bg-blue-500' },
-                        { name: isBangla ? 'আকাশ ও বিমান' : 'Civil Aviation', icon: Plane, color: 'text-sky-600', dot: 'bg-sky-500' },
-                        { name: isBangla ? 'রেল ও ক্রসিং' : 'Rail Corridors', icon: Train, color: 'text-emerald-600', dot: 'bg-emerald-500' },
-                        { name: isBangla ? 'নৌ ও নদীপথ' : 'Maritime & Riverine', icon: Ship, color: 'text-teal-600', dot: 'bg-teal-500' },
-                    ].map((pill, idx) => {
-                        const Icon = pill.icon;
-                        return (
-                            <a
-                                key={idx}
-                                href="#quadrants"
-                                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 text-slate-700 hover:text-blue-700 hover:border-blue-300 shadow-sm transition-all"
-                            >
-                                <span className={`w-1.5 h-1.5 rounded-full ${pill.dot}`}></span>
-                                <Icon className={`w-3.5 h-3.5 ${pill.color}`} />
-                                <span className="font-semibold">{pill.name}</span>
-                            </a>
-                        );
-                    })}
-                </div>
             </div>
 
             {/* Bottom Elevated Stats Bar */}
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 w-full mt-12 sm:mt-16">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 w-full mt-10">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
                     {statCards.map((stat, idx) => {
                         const Icon = stat.icon;

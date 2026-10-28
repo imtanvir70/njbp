@@ -28,99 +28,138 @@
 }
 
 /* -------------------------------------------------------------
- * Transit Motion Animations for Hero Background (Bus, Car, Train, Ship, Air)
+ * 4 Corners Staggered Sequential Relay Animation (20s Total Cycle)
+ * One after another: Air -> Rail -> Road -> Water
  * ------------------------------------------------------------- */
-@keyframes transitMoveRight {
+
+/* 1. Corner Air (Top-Right): Active 0% to 26% (0s - 5.2s) */
+@keyframes cornerAirRelay {
     0% {
-        transform: translateX(-150px);
+        opacity: 0;
+        transform: translate(-60px, 30px) rotate(-6deg) scale(0.9);
+    }
+    4% {
+        opacity: 0.35;
+    }
+    22% {
+        opacity: 0.35;
+    }
+    28%, 100% {
+        opacity: 0;
+        transform: translate(260px, -40px) rotate(-2deg) scale(1.05);
+    }
+}
+
+/* 2. Corner Rail (Top-Left): Active 25% to 51% (5s - 10.2s) */
+@keyframes cornerRailRelay {
+    0%, 23% {
+        opacity: 0;
+        transform: translateX(-160px) scale(0.95);
+    }
+    26% {
+        opacity: 0.35;
+    }
+    46% {
+        opacity: 0.35;
+    }
+    51%, 100% {
+        opacity: 0;
+        transform: translateX(280px) scale(1.02);
+    }
+}
+
+/* 3. Corner Road (Bottom-Left): Active 50% to 76% (10s - 15.2s) */
+@keyframes cornerRoadRelay {
+    0%, 48% {
+        opacity: 0;
+        transform: translateX(-160px);
+    }
+    52% {
+        opacity: 0.35;
+    }
+    72% {
+        opacity: 0.35;
+    }
+    77%, 100% {
+        opacity: 0;
+        transform: translateX(280px);
+    }
+}
+
+/* 4. Corner Water (Bottom-Right): Active 75% to 100% (15s - 20s) */
+@keyframes cornerWaterRelay {
+    0%, 73% {
+        opacity: 0;
+        transform: translateX(180px) translateY(0);
+    }
+    76% {
+        opacity: 0.35;
+    }
+    86% {
+        transform: translateX(20px) translateY(-3px);
+    }
+    96% {
+        opacity: 0.35;
     }
     100% {
-        transform: translateX(calc(100vw + 150px));
+        opacity: 0;
+        transform: translateX(-180px) translateY(2px);
     }
 }
 
-@keyframes transitMoveLeft {
-    0% {
-        transform: translateX(calc(100vw + 150px));
-    }
-    100% {
-        transform: translateX(-150px);
-    }
+/* Active Corner Glow Pulses synchronized with transit */
+@keyframes cornerPillPulseAir {
+    0%, 25% { opacity: 1; border-color: rgba(14, 165, 233, 0.6); background-color: rgba(224, 242, 254, 0.7); }
+    28%, 100% { opacity: 0.45; border-color: rgba(226, 232, 240, 0.8); background-color: rgba(255, 255, 255, 0.6); }
 }
 
-@keyframes flightGlide {
-    0% {
-        transform: translate(-180px, 15px) rotate(1.5deg);
-    }
-    50% {
-        transform: translate(50vw, -10px) rotate(-0.5deg);
-    }
-    100% {
-        transform: translate(calc(100vw + 180px), 10px) rotate(1deg);
-    }
+@keyframes cornerPillPulseRail {
+    0%, 24% { opacity: 0.45; border-color: rgba(226, 232, 240, 0.8); background-color: rgba(255, 255, 255, 0.6); }
+    26%, 50% { opacity: 1; border-color: rgba(16, 185, 129, 0.6); background-color: rgba(209, 250, 229, 0.7); }
+    53%, 100% { opacity: 0.45; border-color: rgba(226, 232, 240, 0.8); background-color: rgba(255, 255, 255, 0.6); }
 }
 
-@keyframes shipFloat {
-    0% {
-        transform: translateX(calc(100vw + 200px)) translateY(0px);
-    }
-    25% {
-        transform: translateX(75vw) translateY(-4px);
-    }
-    50% {
-        transform: translateX(50vw) translateY(2px);
-    }
-    75% {
-        transform: translateX(25vw) translateY(-3px);
-    }
-    100% {
-        transform: translateX(-200px) translateY(0px);
-    }
+@keyframes cornerPillPulseRoad {
+    0%, 49% { opacity: 0.45; border-color: rgba(226, 232, 240, 0.8); background-color: rgba(255, 255, 255, 0.6); }
+    51%, 75% { opacity: 1; border-color: rgba(59, 130, 246, 0.6); background-color: rgba(219, 234, 254, 0.7); }
+    78%, 100% { opacity: 0.45; border-color: rgba(226, 232, 240, 0.8); background-color: rgba(255, 255, 255, 0.6); }
 }
 
-@keyframes wavePulse {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(-30px);
-    }
+@keyframes cornerPillPulseWater {
+    0%, 74% { opacity: 0.45; border-color: rgba(226, 232, 240, 0.8); background-color: rgba(255, 255, 255, 0.6); }
+    76%, 99% { opacity: 1; border-color: rgba(20, 184, 166, 0.6); background-color: rgba(204, 251, 241, 0.7); }
+    100% { opacity: 0.45; border-color: rgba(226, 232, 240, 0.8); background-color: rgba(255, 255, 255, 0.6); }
 }
 
-.animate-plane-glide {
-    animation: flightGlide 24s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    will-change: transform;
+.animate-corner-air {
+    animation: cornerAirRelay 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform, opacity;
 }
 
-.animate-train-glide {
-    animation: transitMoveRight 18s linear infinite;
-    will-change: transform;
+.animate-corner-rail {
+    animation: cornerRailRelay 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform, opacity;
 }
 
-.animate-bus-glide {
-    animation: transitMoveRight 22s linear infinite;
-    animation-delay: 3s;
-    will-change: transform;
+.animate-corner-road {
+    animation: cornerRoadRelay 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform, opacity;
 }
 
-.animate-car-glide {
-    animation: transitMoveRight 14s linear infinite;
-    animation-delay: 8s;
-    will-change: transform;
+.animate-corner-water {
+    animation: cornerWaterRelay 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform, opacity;
 }
 
-.animate-car-left {
-    animation: transitMoveLeft 16s linear infinite;
-    animation-delay: 2s;
-    will-change: transform;
+.animate-pill-air {
+    animation: cornerPillPulseAir 20s ease-in-out infinite;
 }
-
-.animate-ship-float {
-    animation: shipFloat 28s ease-in-out infinite;
-    will-change: transform;
+.animate-pill-rail {
+    animation: cornerPillPulseRail 20s ease-in-out infinite;
 }
-
-.animate-waves {
-    animation: wavePulse 8s ease-in-out infinite;
-    will-change: transform;
+.animate-pill-road {
+    animation: cornerPillPulseRoad 20s ease-in-out infinite;
+}
+.animate-pill-water {
+    animation: cornerPillPulseWater 20s ease-in-out infinite;
 }

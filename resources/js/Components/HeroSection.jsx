@@ -158,7 +158,7 @@ export default function HeroSection({ stats = {}, onOpenIncidentModal }) {
                 </div>
             </div>
 
-            {/* Bottom Elevated Stats Bar */}
+            {/* Bottom Elevated Stats Bar: Glossy + Semi-Transparent + Blur */}
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 w-full mt-10">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
                     {statCards.map((stat, idx) => {
@@ -166,25 +166,32 @@ export default function HeroSection({ stats = {}, onOpenIncidentModal }) {
                         return (
                             <div
                                 key={idx}
-                                className="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-slate-200/90 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5"
+                                className="relative overflow-hidden bg-white/50 hover:bg-white/65 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_36px_rgb(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-1 group"
                             >
-                                <div className="flex items-center justify-between mb-2">
-                                    <div className={`p-2 rounded-xl ${stat.bg} ${stat.color} border`}>
-                                        <Icon className="w-4 h-4" />
+                                {/* Glossy top edge reflection */}
+                                <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 pointer-events-none"></div>
+                                <div className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-transparent pointer-events-none"></div>
+
+                                <div className="relative z-10">
+                                    <div className="flex items-center justify-between mb-2.5">
+                                        <div className={`p-2 rounded-xl ${stat.bg} ${stat.color} border border-white/80 shadow-sm backdrop-blur-md group-hover:scale-105 transition-transform`}>
+                                            <Icon className="w-4 h-4" />
+                                        </div>
+                                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-800 border border-emerald-500/30 backdrop-blur-md flex items-center gap-1">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                            <span>Live</span>
+                                        </span>
                                     </div>
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                                        Live
-                                    </span>
+                                    <div className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight drop-shadow-sm">
+                                        {stat.val}
+                                    </div>
+                                    <div className="text-xs font-bold text-slate-800 mt-0.5 truncate">
+                                        {stat.label}
+                                    </div>
+                                    <p className="text-[11px] text-slate-600 mt-0.5 truncate font-medium">
+                                        {stat.desc}
+                                    </p>
                                 </div>
-                                <div className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                                    {stat.val}
-                                </div>
-                                <div className="text-xs font-bold text-slate-700 mt-0.5 truncate">
-                                    {stat.label}
-                                </div>
-                                <p className="text-[11px] text-slate-500 mt-0.5 truncate">
-                                    {stat.desc}
-                                </p>
                             </div>
                         );
                     })}

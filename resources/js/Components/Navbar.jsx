@@ -36,12 +36,15 @@ export default function Navbar({ onOpenIncidentModal }) {
 
     return (
         <header className="sticky top-0 z-50 w-full transition-all duration-300">
-            {/* Minimal Main Navigation Bar */}
-            <nav className={`px-4 sm:px-8 py-3 transition-all duration-300 ${
+            {/* Minimal Semi-Transparent + Blur Main Navigation Bar */}
+            <nav className={`relative px-4 sm:px-8 py-3 transition-all duration-300 border-b ${
                 scrolled 
-                    ? 'bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]' 
-                    : 'bg-white border-b border-slate-200/80 shadow-sm'
+                    ? 'bg-white/80 backdrop-blur-2xl border-slate-200/80 shadow-[0_4px_25px_-5px_rgba(0,0,0,0.08)]' 
+                    : 'bg-white/65 backdrop-blur-xl border-white/60 shadow-[0_4px_25px_-5px_rgba(0,0,0,0.04)]'
             }`}>
+                {/* Subtle top glossy specular line */}
+                <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 pointer-events-none"></div>
+
                 <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
                     {/* Brand with Full Name & New Logo */}
                     <Link href={route('home')} className="focus:outline-none">

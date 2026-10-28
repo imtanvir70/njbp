@@ -4,24 +4,10 @@
 
 @layer utilities {
     .glass-panel {
-        background: rgba(15, 23, 42, 0.75);
+        background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    
-    .glass-card {
-        background: rgba(17, 27, 51, 0.8);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(56, 189, 248, 0.12);
-    }
-
-    .glow-primary {
-        box-shadow: 0 0 25px -5px rgba(14, 165, 233, 0.3);
-    }
-
-    .glow-emerald {
-        box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.3);
+        border: 1px solid rgba(226, 232, 240, 0.8);
     }
 }
 
@@ -39,4 +25,102 @@
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #0ea5e9;
+}
+
+/* -------------------------------------------------------------
+ * Transit Motion Animations for Hero Background (Bus, Car, Train, Ship, Air)
+ * ------------------------------------------------------------- */
+@keyframes transitMoveRight {
+    0% {
+        transform: translateX(-150px);
+    }
+    100% {
+        transform: translateX(calc(100vw + 150px));
+    }
+}
+
+@keyframes transitMoveLeft {
+    0% {
+        transform: translateX(calc(100vw + 150px));
+    }
+    100% {
+        transform: translateX(-150px);
+    }
+}
+
+@keyframes flightGlide {
+    0% {
+        transform: translate(-180px, 15px) rotate(1.5deg);
+    }
+    50% {
+        transform: translate(50vw, -10px) rotate(-0.5deg);
+    }
+    100% {
+        transform: translate(calc(100vw + 180px), 10px) rotate(1deg);
+    }
+}
+
+@keyframes shipFloat {
+    0% {
+        transform: translateX(calc(100vw + 200px)) translateY(0px);
+    }
+    25% {
+        transform: translateX(75vw) translateY(-4px);
+    }
+    50% {
+        transform: translateX(50vw) translateY(2px);
+    }
+    75% {
+        transform: translateX(25vw) translateY(-3px);
+    }
+    100% {
+        transform: translateX(-200px) translateY(0px);
+    }
+}
+
+@keyframes wavePulse {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-30px);
+    }
+}
+
+.animate-plane-glide {
+    animation: flightGlide 24s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    will-change: transform;
+}
+
+.animate-train-glide {
+    animation: transitMoveRight 18s linear infinite;
+    will-change: transform;
+}
+
+.animate-bus-glide {
+    animation: transitMoveRight 22s linear infinite;
+    animation-delay: 3s;
+    will-change: transform;
+}
+
+.animate-car-glide {
+    animation: transitMoveRight 14s linear infinite;
+    animation-delay: 8s;
+    will-change: transform;
+}
+
+.animate-car-left {
+    animation: transitMoveLeft 16s linear infinite;
+    animation-delay: 2s;
+    will-change: transform;
+}
+
+.animate-ship-float {
+    animation: shipFloat 28s ease-in-out infinite;
+    will-change: transform;
+}
+
+.animate-waves {
+    animation: wavePulse 8s ease-in-out infinite;
+    will-change: transform;
 }

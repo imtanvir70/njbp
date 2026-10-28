@@ -3,9 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Nirapod Jatayat (Safe Journey) - International Non-Profit Multimodal Transit Safety Organization monitoring Road, Aviation, Railway, and Maritime transportation and fostering public awareness.">
+        <meta name="description" content="নিরাপদ যাতায়াত বাস্তবায়ন পরিষদ (নিযাবাপ / NJBP) - নিরাপদ বহুমুখী যাতায়াত বাস্তবায়ন ও নাগরিক সচেতনতা পরিষদ।">
+        <link rel="icon" type="image/jpeg" href="/images/njbp-logo.jpg">
 
-        <title inertia>{{ config('app.name', 'Nirapod Jatayat') }} - Safe Multimodal Transit International</title>
+        <title inertia>{{ config('app.name', 'নিরাপদ যাতায়াত বাস্তবায়ন পরিষদ') }} - NJBP</title>
 
         <!-- Google Fonts: Plus Jakarta Sans & Inter -->
         <link rel="preconnect" href="https://fonts.googleapis.com">

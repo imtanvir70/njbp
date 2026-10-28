@@ -4,9 +4,9 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 export const translations = {
     en: {
         // Brand & Header
-        orgName: 'Nirapod Jatayat',
-        intlBadge: 'INTL',
-        tagline: 'Multimodal Safety & Vigilance Council',
+        orgName: 'Nirapod Jatayat Bastobayon Parishad',
+        intlBadge: 'NJBP',
+        tagline: 'Safe Transit Implementation Council',
         topNotice: 'Global Transit Vigilance: Active 24/7',
         topFramework: 'Aligned with UN Decade of Action for Road Safety 2021–2030',
         hotlineLabel: 'Transit Hotline: 16100 / 999',
@@ -119,9 +119,9 @@ export const translations = {
     },
     bn: {
         // Brand & Header
-        orgName: 'নিরাপদ যাতায়াত',
-        intlBadge: 'আন্তর্জাতিক',
-        tagline: 'মাল্টিমোডাল পরিবহন নিরাপত্তা ও নাগরিক সচেতনতা পরিষদ',
+        orgName: 'নিরাপদ যাতায়াত বাস্তবায়ন পরিষদ',
+        intlBadge: 'নিযাবাপ',
+        tagline: 'মাল্টিমোডাল পরিবহন সুরক্ষা কাউন্সিল (NJBP)',
         topNotice: 'সার্বক্ষণিক যাতায়াত নজরদারি: ২৪/৭ সক্রিয়',
         topFramework: 'জাতিসংঘ সড়ক নিরাপত্তা দশক ২০২১–২০৩০ নীতিমালা অনুসৃত',
         hotlineLabel: 'জরুরি ট্রানজিট হটলাইন: ১৬১০০ / ৯৯৯',

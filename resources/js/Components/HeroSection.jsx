@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useLanguage } from '@/Context/LanguageContext';
-import TransitAnimationBackground from './TransitAnimationBackground';
 import { 
     AlertTriangle, 
     ArrowRight, 
@@ -14,6 +13,31 @@ import {
 export default function HeroSection({ stats = {}, onOpenIncidentModal }) {
     const { lang } = useLanguage();
     const isBangla = lang === 'bn';
+    const videoRef = useRef(null);
+    const [videoLoaded, setVideoLoaded] = useState(false);
+
+    // Lazy load the background video to keep initial page load blazing fast
+    useEffect(() => {
+        // Delay video loading until after the main thread is idle / initial render is complete
+        const loadVideo = () => {
+            if (videoRef.current) {
+                videoRef.current.src = '/videos/hero-transit.mp4';
+                videoRef.current.load();
+                videoRef.current.play().then(() => {
+                    setVideoLoaded(true);
+                }).catch(() => {
+                    // Autoplay prevented fallback
+                });
+            }
+        };
+
+        if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadVideo, { timeout: 1200 });
+        } else {
+            const timer = setTimeout(loadVideo, 400);
+            return () => clearTimeout(timer);
+        }
+    }, []);
 
     const statCards = [
         {
@@ -51,41 +75,60 @@ export default function HeroSection({ stats = {}, onOpenIncidentModal }) {
     ];
 
     return (
-        <section className="relative min-h-[720px] lg:min-h-[780px] flex flex-col justify-between pt-12 pb-14 md:pt-16 md:pb-16 bg-gradient-to-b from-slate-50 via-white to-slate-50/70 overflow-hidden border-b border-slate-200/80">
-            {/* 4 Corners Sequential Staggered Transit Animation Background */}
-            <TransitAnimationBackground />
+        <section className="relative min-h-[720px] lg:min-h-[780px] flex flex-col justify-between pt-12 pb-14 md:pt-16 md:pb-16 overflow-hidden border-b border-slate-200/80 bg-slate-50">
+            {/* =========================================================
+             * Lazy-Loaded User's Video Background
+             * ========================================================= */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
+                <video
+                    ref={videoRef}
+                    loop
+                    muted
+                    playsInline
+                    preload="none"
+                    className={`w-full h-full object-cover object-center filter saturate-[1.15] transition-opacity duration-1000 ${
+                        videoLoaded ? 'opacity-100' : 'opacity-0'
+                    }`}
+                />
 
-            {/* Middle Foreground Area: Completely Clean, Unobstructed & Ultra-Bold */}
+                {/* Soft Frosting & Gradient Overlay: Ensures crystal-clear foreground text while video remains vivid */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/75 to-white/90 backdrop-blur-[1.5px]"></div>
+                
+                {/* Subtle Grid Accent */}
+                <div className="absolute inset-0 bg-[radial-gradient(#0284c7_0.6px,transparent_0.6px)] [background-size:24px_24px] opacity-10"></div>
+            </div>
+
+            {/* Middle Foreground Area: Completely Clean, Unobstructed & Big Bold Text */}
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center my-auto space-y-6">
                 {/* Official Accreditation Pill */}
                 <div className="flex justify-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-slate-200 shadow-sm text-slate-700 text-xs font-bold">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm text-slate-700 text-xs font-bold">
                         <span className="flex h-2 w-2 relative">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                         </span>
                         <span className="text-blue-700 font-extrabold uppercase tracking-wider text-[10px]">
-                            {isBangla ? 'জাতিসংঘ সড়ক নিরাপত্তা দশক ২০২১–২০৩০' : 'UN DECADE OF ACTION 2021–2030'}
+                            {isBangla ? 'নিযাবাপ (NJBP) • জাতিসংঘ ফ্রেমওয়ার্ক' : 'NJBP • UN DECADE OF ACTION'}
                         </span>
                         <span className="text-slate-300">|</span>
                         <span className="text-slate-600 font-medium text-[11px]">
-                            {isBangla ? 'আন্তর্জাতিক বহুমুখী যাতায়াত নিরাপত্তা কাউন্সিল' : 'Multimodal Transit Safety & Vigilance'}
+                            {isBangla ? 'নিরাপদ যাতায়াত বাস্তবায়ন পরিষদ' : 'Safe Transit Implementation Council'}
                         </span>
                     </div>
                 </div>
 
                 {/* Big Bold Headline Requested by User */}
                 <div className="space-y-2">
-                    <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 tracking-tight leading-[1.12]">
+                    <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 tracking-tight leading-[1.12] drop-shadow-sm">
                         {isBangla ? 'নিরাপদ হোক প্রতিটি যাত্রা —' : 'Safeguarding Every Journey —'}
                     </h1>
-                    <div className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.12] bg-gradient-to-r from-blue-700 via-sky-600 to-teal-600 bg-clip-text text-transparent">
+                    <div className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.12] bg-gradient-to-r from-blue-700 via-sky-600 to-teal-600 bg-clip-text text-transparent drop-shadow-sm">
                         {isBangla ? 'সড়ক, আকাশ, রেল ও নৌপথে' : 'Road, Sky, Rail & Water'}
                     </div>
                 </div>
 
                 {/* Clean Mission Subtitle */}
-                <p className="text-base sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
+                <p className="text-base sm:text-xl text-slate-700 leading-relaxed max-w-2xl mx-auto font-medium">
                     {isBangla
                         ? 'সড়ক দুর্ঘটনা রোধ, বিমানের গ্রাউন্ড সেফটি, ট্রেনের অরক্ষিত ক্রসিং এবং নদীপথে লঞ্চের অতিরিক্ত বোঝাই বন্ধে সার্বক্ষণিক নজরদারি ও জনসচেতনতা বৃদ্ধিতে নিবেদিত।'
                         : 'Dedicated to continuous surveillance, blackspot elimination, and nationwide public awareness to prevent accidents across highways, aviation, railways, and waterways.'}

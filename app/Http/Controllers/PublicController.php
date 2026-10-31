@@ -9,6 +9,7 @@ use App\Models\TeamMember;
 use App\Models\SuccessStory;
 use App\Models\IncidentReport;
 use App\Models\SafetyCampaign;
+use App\Models\SiteSetting;
 use Illuminate\Support\Str;
 
 class PublicController extends Controller
@@ -38,11 +39,12 @@ class PublicController extends Controller
             ->get();
 
         $stats = [
-            'total_audits' => 1420,
-            'citizens_reached' => '850K+',
-            'corridors_monitored' => 64,
-            'resolution_rate' => '98.4%',
-            'active_volunteers' => 3200,
+            'total_audits' => SiteSetting::get('hero_audits', '1420'),
+            'citizens_reached' => SiteSetting::get('hero_citizens', '850K+'),
+            'corridors_monitored' => SiteSetting::get('hero_corridors', '64'),
+            'resolution_rate' => SiteSetting::get('hero_resolution', '98.4%'),
+            'active_volunteers' => SiteSetting::get('volunteer_count', '3,200+'),
+            'hotline_number' => SiteSetting::get('hotline_number', '16100'),
             'countries_collaborating' => 12,
         ];
 

@@ -13,7 +13,8 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['"Plus Jakarta Sans"', 'Inter', ...defaultTheme.fontFamily.sans],
+                sans: ['"Hind Siliguri"', '"Noto Sans Bengali"', '"Plus Jakarta Sans"', 'Inter', ...defaultTheme.fontFamily.sans],
+                bengali: ['"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
             },
             colors: {
                 nj: {

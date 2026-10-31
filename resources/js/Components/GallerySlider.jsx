@@ -66,18 +66,21 @@ export default function GallerySlider({ items = [] }) {
 
     return (
         <div className="w-full">
-            {/* Category Filter Tabs */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+            {/* Category Filter Tabs: Frosted Glass Segmented Control */}
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-10">
                 {categories.map((cat) => (
                     <button
                         key={cat.id}
                         onClick={() => setSelectedCategory(cat.id)}
-                        className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all ${
+                        className={`relative overflow-hidden px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold tracking-tight transition-all duration-300 ${
                             selectedCategory === cat.id
-                                ? 'bg-sky-600 text-white shadow-md shadow-sky-600/25 scale-105'
-                                : 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-sm'
+                                ? 'bg-gradient-to-r from-blue-700 via-sky-600 to-teal-600 text-white shadow-md shadow-sky-600/25 scale-105'
+                                : 'bg-white/70 hover:bg-white text-slate-700 border border-white/90 shadow-sm backdrop-blur-md hover:-translate-y-0.5'
                         }`}
                     >
+                        {selectedCategory === cat.id && (
+                            <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none"></div>
+                        )}
                         {cat.label}
                     </button>
                 ))}

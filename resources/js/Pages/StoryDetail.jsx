@@ -13,12 +13,12 @@ function StoryDetailContent({ story, relatedStories = [] }) {
                 <title>{`${story.title} - Nirapod Jatayat`}</title>
             </Head>
 
-            {/* Back Nav */}
-            <div className="bg-white border-b border-slate-200 py-4">
+            {/* Back Nav: Frosted Glass */}
+            <div className="bg-white/70 backdrop-blur-xl border-b border-slate-200/80 py-4 font-bengali sticky top-16 z-30">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6">
                     <Link
                         href={route('stories')}
-                        className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-sky-700 transition-colors"
+                        className="inline-flex items-center gap-2 text-xs font-black text-slate-700 hover:text-blue-700 transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         <span>{lang === 'bn' ? 'সকল সাফল্যের গল্পে ফিরে যান' : 'Back to All Success Stories'}</span>
@@ -26,8 +26,8 @@ function StoryDetailContent({ story, relatedStories = [] }) {
                 </div>
             </div>
 
-            {/* Article Container - Light Mode */}
-            <article className="max-w-4xl mx-auto px-4 sm:px-6 py-12 space-y-8">
+            {/* Article Container: Frosted Light Aesthetic */}
+            <article className="max-w-4xl mx-auto px-4 sm:px-6 py-14 space-y-10 font-bengali">
                 {/* Meta Header */}
                 <div className="space-y-4">
                     <div className="flex flex-wrap items-center gap-3">

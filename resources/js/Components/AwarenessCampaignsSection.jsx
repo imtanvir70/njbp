@@ -64,24 +64,31 @@ export default function AwarenessCampaignsSection({ campaigns = [] }) {
     const currentTips = transitTips[selectedTransit] || transitTips.road;
 
     return (
-        <section id="awareness" className="py-20 bg-slate-50 border-t border-slate-200/80 relative">
-            <div className="max-w-7xl mx-auto px-4 sm:px-8">
+        <section id="awareness" className="py-24 bg-slate-50/70 border-t border-slate-200/80 relative overflow-hidden font-bengali">
+            {/* Subtle Grid Accent */}
+            <div className="absolute inset-0 bg-[radial-gradient(#0284c7_0.6px,transparent_0.6px)] [background-size:24px_24px] opacity-[0.06] pointer-events-none"></div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
                 {/* Section Header */}
                 <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-200 text-amber-800 text-xs font-semibold">
-                        <BookOpen className="w-3.5 h-3.5 text-amber-600" />
-                        <span>{t('awarenessBadge')}</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/85 hover:bg-white backdrop-blur-xl border border-white/90 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.06)] text-slate-700 text-xs font-bold transition-all">
+                        <span className="flex h-2 w-2 relative">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <BookOpen className="w-3.5 h-3.5 text-blue-600" />
+                        <span className="text-blue-700 font-extrabold uppercase tracking-wider text-[11px]">{t('awarenessBadge')}</span>
                     </div>
-                    <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                    <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.3]">
                         {t('awarenessTitle')}
                     </h2>
-                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                    <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
                         {t('awarenessSubtitle')}
                     </p>
                 </div>
 
-                {/* Mode Selector Tabs */}
-                <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+                {/* Mode Selector Tabs: Frosted Glass */}
+                <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-12">
                     {[
                         { id: 'road', name: t('sectorRoad'), icon: Car },
                         { id: 'air', name: t('sectorAir'), icon: Plane },
@@ -94,12 +101,15 @@ export default function AwarenessCampaignsSection({ campaigns = [] }) {
                             <button
                                 key={mode.id}
                                 onClick={() => setSelectedTransit(mode.id)}
-                                className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold transition-all ${
+                                className={`relative overflow-hidden flex items-center gap-2.5 px-5 py-3 sm:px-6 sm:py-3.5 rounded-2xl text-xs sm:text-sm font-black transition-all duration-300 ${
                                     isSelected
-                                        ? 'bg-gradient-to-r from-sky-600 to-teal-600 text-white shadow-md shadow-sky-600/20 scale-105'
-                                        : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shadow-sm'
+                                        ? 'bg-gradient-to-r from-blue-700 via-sky-600 to-teal-600 text-white shadow-lg shadow-sky-600/25 scale-105'
+                                        : 'bg-white/70 hover:bg-white text-slate-700 border border-white/90 shadow-sm backdrop-blur-md hover:-translate-y-0.5'
                                 }`}
                             >
+                                {isSelected && (
+                                    <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none"></div>
+                                )}
                                 <Icon className="w-4 h-4" />
                                 <span>{mode.name}</span>
                             </button>
@@ -107,21 +117,24 @@ export default function AwarenessCampaignsSection({ campaigns = [] }) {
                     })}
                 </div>
 
-                {/* Guidelines Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                {/* Guidelines Cards Grid: Frosted Glass */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-16">
                     {currentTips.map((tip, idx) => (
                         <div
                             key={idx}
-                            className="bg-white rounded-3xl border border-slate-200 p-6 flex items-start gap-4 hover:border-sky-300 transition-all shadow-sm hover:shadow-md group"
+                            className="relative overflow-hidden bg-white/70 hover:bg-white/95 backdrop-blur-xl rounded-3xl border border-white/90 p-6 sm:p-7 flex items-start gap-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgb(0,0,0,0.08)] shadow-[0_8px_30px_rgb(0,0,0,0.05)] group"
                         >
-                            <div className="p-3 rounded-2xl bg-sky-50 text-sky-600 border border-sky-100 group-hover:bg-sky-600 group-hover:text-white transition-all shrink-0">
+                            {/* Glossy top edge highlight */}
+                            <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 pointer-events-none"></div>
+
+                            <div className="p-3.5 rounded-2xl bg-blue-50 text-blue-700 border border-blue-100 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-sky-600 group-hover:text-white transition-all shadow-sm shrink-0 group-hover:scale-110">
                                 <CheckCircle className="w-5 h-5" />
                             </div>
-                            <div className="space-y-1.5">
-                                <h3 className="font-bold text-base text-slate-900 group-hover:text-sky-600 transition-colors">
+                            <div className="space-y-2">
+                                <h3 className="font-black text-lg text-slate-900 group-hover:text-blue-700 transition-colors tracking-tight">
                                     {tip.tip}
                                 </h3>
-                                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
                                     {tip.desc}
                                 </p>
                             </div>
@@ -130,29 +143,34 @@ export default function AwarenessCampaignsSection({ campaigns = [] }) {
                 </div>
 
                 {/* Join Movement Banner / Volunteer Pledge */}
-                <div id="join-movement" className="relative rounded-3xl bg-gradient-to-r from-slate-900 via-sky-950 to-teal-950 text-white p-8 sm:p-12 overflow-hidden shadow-2xl">
-                    <div className="relative max-w-3xl space-y-4">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
+                <div id="join-movement" className="relative rounded-3xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white p-8 sm:p-12 overflow-hidden shadow-2xl border border-slate-700/60">
+                    {/* Glossy top edge highlight */}
+                    <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none"></div>
+
+                    <div className="relative z-10 max-w-3xl space-y-4">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-black backdrop-blur-md">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                             <Users className="w-3.5 h-3.5" />
                             <span>{lang === 'bn' ? 'গ্লোবাল ভলান্টিয়ার ব্রিগেড: ৩,২০০+ সদস্য' : 'Global Volunteer Brigade: 3,200+ Members'}</span>
                         </div>
-                        <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        <h3 className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-snug">
                             {t('volunteerTitle')}
                         </h3>
-                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                        <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
                             {t('volunteerDesc')}
                         </p>
 
                         <div className="pt-2 flex flex-wrap gap-4">
                             <a
                                 href="mailto:volunteer@nirapodjatayat.org?subject=Joining%20Nirapod%20Jatayat%20Brigade"
-                                className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-teal-500 hover:from-sky-400 hover:to-teal-400 text-white font-bold text-xs sm:text-sm shadow-lg shadow-sky-900/40 transition-all hover:scale-105"
+                                className="relative overflow-hidden px-7 py-4 rounded-2xl bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-600 text-white font-black text-xs sm:text-sm shadow-xl shadow-red-600/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2"
                             >
-                                {t('volunteerBtn')}
+                                <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none"></div>
+                                <span>{t('volunteerBtn')}</span>
                             </a>
                             <a
                                 href="#stories"
-                                className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm border border-white/20 transition-all backdrop-blur-sm"
+                                className="px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-xs sm:text-sm border border-white/25 transition-all backdrop-blur-md hover:scale-[1.02]"
                             >
                                 {t('volunteerSecondary')}
                             </a>

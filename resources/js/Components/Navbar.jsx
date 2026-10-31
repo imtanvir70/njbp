@@ -29,6 +29,7 @@ export default function Navbar({ onOpenIncidentModal }) {
     const navLinks = [
         { label: isBangla ? 'মূল পাতা' : 'Home', href: route('home') },
         { label: isBangla ? '৪টি ট্রানজিট ডিভিশন' : '4 Transit Sectors', href: `${route('home')}#quadrants` },
+        { label: isBangla ? 'জরুরি উদ্ধার গাইড' : 'Rescue Protocols', href: `${route('home')}#rescue-guide` },
         { label: isBangla ? 'ফটো গ্যালারি' : 'Photo Gallery', href: route('gallery') },
         { label: isBangla ? 'সাফল্যের গল্প' : 'Success Stories', href: route('stories') },
         { label: isBangla ? 'নেতৃত্ব ও পর্ষদ' : 'Leadership & Board', href: route('team') },
@@ -38,17 +39,17 @@ export default function Navbar({ onOpenIncidentModal }) {
     return (
         <header className="sticky top-0 z-50 w-full transition-all duration-300">
             {/* Top Brand & Utility Header: Semi-Transparent + Blur */}
-            <div className={`relative px-4 sm:px-8 transition-all duration-300 border-b ${
+            <div className={`relative px-3 sm:px-6 md:px-8 transition-all duration-300 border-b ${
                 scrolled
                     ? 'py-2 bg-white/90 backdrop-blur-2xl border-slate-200/80 shadow-[0_4px_25px_-5px_rgba(0,0,0,0.06)]'
-                    : 'py-3.5 bg-white/80 backdrop-blur-xl border-slate-200/70 shadow-sm'
+                    : 'py-2.5 sm:py-3.5 bg-white/80 backdrop-blur-xl border-slate-200/70 shadow-sm'
             }`}>
                 {/* Glossy top edge highlight */}
                 <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 pointer-events-none"></div>
 
-                <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 sm:gap-8">
+                <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4 md:gap-8">
                     {/* Brand Identity with Large, Crystal-Clear Logo & Full Name */}
-                    <Link href={route('home')} className="focus:outline-none shrink-0">
+                    <Link href={route('home')} className="focus:outline-none min-w-0 flex-1 md:flex-initial">
                         <BrandLogo />
                     </Link>
 
@@ -102,20 +103,20 @@ export default function Navbar({ onOpenIncidentModal }) {
                         </button>
                     </div>
 
-                    {/* Mobile Hamburger Toggle */}
-                    <div className="md:hidden flex items-center gap-2">
+                    {/* Mobile Controls: Language & Hamburger */}
+                    <div className="md:hidden flex items-center gap-1.5 shrink-0">
                         <button
                             onClick={() => setLanguage(isBangla ? 'en' : 'bn')}
-                            className="px-2.5 py-1.5 text-xs font-bold rounded-xl bg-slate-100 border border-slate-200 text-slate-800"
+                            className="px-2 py-1.5 text-xs font-bold rounded-lg bg-slate-100/90 border border-slate-200 text-slate-800"
                         >
                             {isBangla ? 'EN' : 'বাং'}
                         </button>
                         <button
                             onClick={() => setMobileOpen(!mobileOpen)}
-                            className="p-2.5 rounded-xl bg-slate-100 text-slate-800 hover:text-slate-900 border border-slate-200 transition-colors"
+                            className="p-2 rounded-xl bg-slate-100/90 text-slate-800 hover:text-slate-900 border border-slate-200 transition-colors"
                             aria-label="Toggle Navigation"
                         >
-                            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                         </button>
                     </div>
                 </div>

@@ -60,29 +60,32 @@ export default function IncidentReporterModal({ isOpen, onClose, flash = {} }) {
     ];
 
     return (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="relative w-full max-w-2xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+            <div className="relative w-full max-w-2xl bg-white/95 backdrop-blur-2xl border border-white/90 rounded-3xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 font-bengali">
+                {/* Glossy top edge highlight */}
+                <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 pointer-events-none z-10"></div>
+
                 {/* Modal Header */}
-                <div className="bg-slate-50 p-6 border-b border-slate-200 flex items-center justify-between">
+                <div className="bg-slate-50/80 p-6 border-b border-slate-200/80 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-600">
+                        <div className="p-3 rounded-2xl bg-red-50 border border-red-200/80 text-red-600 shadow-sm">
                             <ShieldAlert className="w-6 h-6" />
                         </div>
                         <div>
-                            <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <h3 className="text-xl font-black text-slate-900 flex items-center gap-2 tracking-tight">
                                 <span>{t('modalTitle')}</span>
-                                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-rose-100 text-rose-700 border border-rose-200">
-                                    24/7
+                                <span className="text-[10px] uppercase font-black tracking-wider px-2 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200">
+                                    24/7 Live
                                 </span>
                             </h3>
-                            <p className="text-xs text-slate-500">
+                            <p className="text-xs text-slate-500 font-medium">
                                 {t('modalSubtitle')}
                             </p>
                         </div>
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-slate-400 hover:text-slate-700 p-2 rounded-lg hover:bg-slate-200/60 transition-colors"
+                        className="text-slate-400 hover:text-slate-700 p-2.5 rounded-xl hover:bg-slate-200/60 transition-colors"
                     >
                         <X className="w-5 h-5" />
                     </button>
@@ -282,8 +285,9 @@ export default function IncidentReporterModal({ isOpen, onClose, flash = {} }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-rose-600/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
+                                    className="relative overflow-hidden w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-600 text-white font-black text-sm flex items-center justify-center gap-2.5 shadow-xl shadow-red-600/30 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50"
                                 >
+                                    <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none"></div>
                                     <Send className="w-4 h-4" />
                                     <span>{processing ? t('btnSubmitting') : t('btnSubmitIncident')}</span>
                                 </button>

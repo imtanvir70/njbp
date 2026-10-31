@@ -37,16 +37,24 @@ export default function GlobalAffiliationsSection() {
     ];
 
     return (
-        <section className="py-16 bg-white border-t border-slate-200/80">
-            <div className="max-w-7xl mx-auto px-4 sm:px-8">
-                <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
-                    <span className="text-xs font-bold uppercase tracking-wider text-sky-700">
-                        {t('affiliationsBadge')}
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+        <section className="py-24 bg-white/70 border-t border-slate-200/80 relative overflow-hidden font-bengali">
+            {/* Subtle Grid Accent */}
+            <div className="absolute inset-0 bg-[radial-gradient(#0284c7_0.6px,transparent_0.6px)] [background-size:24px_24px] opacity-[0.05] pointer-events-none"></div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8">
+                <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/85 hover:bg-white backdrop-blur-xl border border-white/90 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.06)] text-slate-700 text-xs font-bold transition-all">
+                        <span className="flex h-2 w-2 relative">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
+                        <span className="text-blue-700 font-extrabold uppercase tracking-wider text-[11px]">{t('affiliationsBadge')}</span>
+                    </div>
+                    <h3 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-[1.3]">
                         {t('affiliationsTitle')}
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-600">
+                    <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
                         {t('affiliationsSubtitle')}
                     </p>
                 </div>
@@ -55,16 +63,21 @@ export default function GlobalAffiliationsSection() {
                     {affiliations.map((item, idx) => (
                         <div
                             key={idx}
-                            className="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:border-slate-300 transition-all hover:-translate-y-1 shadow-sm"
+                            className="relative overflow-hidden bg-white/70 hover:bg-white/95 backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-white/90 hover:border-blue-300 shadow-[0_8px_30px_rgb(0,0,0,0.05)] hover:shadow-[0_16px_40px_rgb(0,0,0,0.1)] transition-all duration-300 hover:-translate-y-1.5 group"
                         >
-                            <div className="flex items-center gap-2 mb-3">
-                                <ShieldCheck className="w-5 h-5 text-sky-600" />
-                                <span className="text-xs font-bold uppercase text-slate-500">{item.subtitle}</span>
+                            {/* Glossy top edge highlight */}
+                            <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 pointer-events-none"></div>
+
+                            <div className="flex items-center gap-2 mb-3.5">
+                                <div className="p-2 rounded-xl bg-blue-50 text-blue-700 border border-blue-100 group-hover:scale-110 transition-transform">
+                                    <ShieldCheck className="w-4 h-4" />
+                                </div>
+                                <span className="text-xs font-black uppercase tracking-wider text-slate-500">{item.subtitle}</span>
                             </div>
-                            <h4 className="font-extrabold text-slate-900 text-base mb-2">
+                            <h4 className="font-black text-slate-900 text-lg mb-2 group-hover:text-blue-700 transition-colors tracking-tight">
                                 {item.name}
                             </h4>
-                            <p className="text-xs text-slate-600 leading-relaxed">
+                            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
                                 {item.desc}
                             </p>
                         </div>

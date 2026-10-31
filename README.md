@@ -1,10 +1,12 @@
 # নিরাপদ যাতায়াত বাস্তবায়ন পরিষদ (NJBP)
 ### Nirapod Jatayat Bastobayon Parishad — Multimodal Transit Safety Council
 
-[![Laravel](https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
-[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
-[![Inertia.js](https://img.shields.io/badge/Inertia.js-Modern%20Monolith-9553E9?style=for-the-badge&logo=inertia&logoColor=white)](https://inertiajs.com)
-[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-%5E8.3%20%7C%208.4-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net)
+[![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![Inertia.js](https://img.shields.io/badge/Inertia.js-2.0-9553E9?style=for-the-badge&logo=inertia&logoColor=white)](https://inertiajs.com)
+[![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 ---
@@ -39,21 +41,30 @@
 
 ## 🛠️ টেকনোলজি স্ট্যাক (Tech Stack)
 
-- **Backend:** PHP 8.2+, Laravel 11 (RESTful Architecture, Eloquent ORM)
-- **Frontend:** React 18, Inertia.js, Vite
-- **Styling:** Tailwind CSS, Lucide React Icons
-- **Database:** MySQL / MariaDB
-- **Auth:** Laravel Breeze (Sanctum, Session-based)
+### Backend
+- **Framework:** Laravel 13.x
+- **Runtime:** PHP ^8.3 (Tested on PHP 8.4)
+- **Monolith Bridge:** Inertia.js Laravel Adapter 2.0
+- **Authentication & Security:** Laravel Breeze & Sanctum 4.0
+- **Database ORM:** Eloquent ORM (MySQL / MariaDB / SQLite)
+
+### Frontend
+- **Library:** React 18.3
+- **Client Routing:** Inertia.js React 2.0
+- **Build Tool:** Vite 6.x & `@vitejs/plugin-react`
+- **Styling:** Tailwind CSS 3.4 & `@tailwindcss/forms`
+- **Icons:** Lucide React (1.16+)
+- **Networking:** Axios 1.21+
 
 ---
 
 ## ⚙️ ইনস্টলেশন গাইড (Setup & Installation)
 
 ### পূর্বশর্ত (Prerequisites)
-- PHP >= 8.2
-- Composer
-- Node.js >= 18.x & NPM
-- MySQL Database
+- PHP >= 8.3
+- Composer >= 2.x
+- Node.js >= 18.x & NPM >= 9.x
+- MySQL / MariaDB
 
 ### ১. ক্লোন ও ডিপেন্ডেন্সি ইনস্টলেশন
 ```bash
@@ -73,7 +84,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-`.env` ফাইলে ডেটাবেস ক্রেডেনশিয়াল যুক্ত করুন:
+`.env` ফাইলে ডেটাবেস তথ্য যুক্ত করুন:
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -94,7 +105,7 @@ php artisan migrate --seed
 
 ### ৪. অ্যাপ্লিকেশন রান করা
 ```bash
-# Frontend Build & Asset Watcher
+# Frontend Build / Dev Server
 npm run dev
 
 # Laravel Local Server
@@ -112,13 +123,13 @@ njbp/
 │   ├── Http/Controllers/
 │   │   ├── AdminController.php      # অ্যাডমিন কন্ট্রোল লজিক
 │   │   └── PublicController.php     # পাবলিক পোর্টাল ও ডেটা ফিড
-│   └── Models/                      # Incident, Story, Team, SiteSetting
+│   └── Models/                      # IncidentReport, SuccessStory, TeamMember, SiteSetting
 ├── database/
 │   ├── migrations/                  # ডেটাবেস স্কিমা
 │   └── seeders/                     # প্রাথমিক সিড ডেটা
 ├── resources/
 │   ├── js/
-│   │   ├── Components/              # Hero, Navbar, EmergencyRescueGuide, Footer
+│   │   ├── Components/              # HeroSection, Navbar, EmergencyRescueGuide, Footer
 │   │   ├── Context/                 # LanguageContext (BN/EN)
 │   │   └── Pages/                   # Home, Dashboard, Gallery, Stories, Team
 │   └── views/
